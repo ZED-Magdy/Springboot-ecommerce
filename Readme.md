@@ -8,7 +8,9 @@
 - [ ] I/O Validation
 - [ ] Authentication & Authorization using Spring Security
 - [ ] File system Manipulations
-- [ ] Logging
+- [X] Logging
+  - [Spring Boot Logging](https://www.baeldung.com/spring-boot-logging)
+  - [How to Configure Log4j 2 Logging in Spring Boot?](https://www.geeksforgeeks.org/advance-java/how-to-configure-log4j-2-logging-in-spring-boot/)
 - [ ] Caching
 - [ ] Background Jobs (Queues, Schedule Jobs) Using Kafka, RabbitMQ
 - [ ] Localization
