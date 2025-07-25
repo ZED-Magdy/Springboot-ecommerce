@@ -1,7 +1,8 @@
 # Springboot learning repo
 
 ### what I should cover
-- [ ] Springboot request lifecycle
+- [X] Springboot request lifecycle
+  - [Spring Boot Fundamentals: Spring Boot Request Lifecycle](https://divy9t.medium.com/spring-boot-fundamentals-spring-boot-request-lifecycle-fdb5d9d33485)
 - [ ] Data Access layer using Spring data JPA
 - [ ] Database migrations using Flyway
 - [ ] I/O Validation
