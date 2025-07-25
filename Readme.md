@@ -18,7 +18,9 @@
 - [ ] Error handling
 - [ ] Realtime (Websockets, SSE)
 - [ ] Testing (Unit, Integration)
-- [ ] Monitoring (Metrics, Tracing)
+- [X] Monitoring (Metrics, Tracing)
+  - [Spring Boot Actuator](https://www.baeldung.com/spring-boot-actuators)
+  - [docs.spring.io](https://docs.spring.io/spring-boot/reference/actuator/endpoints.html)
 - [ ] Docker for containerization
 - [ ] Jenkins for CI/CD
 - [ ] Deployment AWS Cloud
