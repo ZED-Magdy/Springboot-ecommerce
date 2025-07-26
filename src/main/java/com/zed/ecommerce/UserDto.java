@@ -15,7 +15,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class UserDto {
-
+    private Long id;
     @NotBlank
     private String email;
 
