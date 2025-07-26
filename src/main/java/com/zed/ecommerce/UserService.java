@@ -1,5 +1,7 @@
 package com.zed.ecommerce;
 
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,11 +14,14 @@ import java.util.stream.Collectors;
 public class UserService {
     private final UserRepository _userRepository;
     private final PasswordEncoder _passwordEncoder;
+    private final AuthenticationManager _authenticationManager;
 
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, AuthenticationManager authenticationManager) {
         this._userRepository = userRepository;
         this._passwordEncoder = passwordEncoder;
+        this._authenticationManager = authenticationManager;
     }
 
     public List<UserDto> findAll() {
@@ -95,5 +100,16 @@ public class UserService {
                 savedUser.getAddress(),
                 Date.from(OffsetDateTime.parse(savedUser.getBirthDate()).toInstant())
         );
+    }
+
+    public User login(LoginUserDto userDto) {
+        _authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        userDto.getPhoneNumber(),
+                        userDto.getPassword()
+                )
+        );
+
+        return _userRepository.findByPhoneNumber(userDto.getPhoneNumber()).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 }

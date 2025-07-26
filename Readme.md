@@ -3,10 +3,13 @@
 ### what I should cover
 - [X] Springboot request lifecycle
   - [Spring Boot Fundamentals: Spring Boot Request Lifecycle](https://divy9t.medium.com/spring-boot-fundamentals-spring-boot-request-lifecycle-fdb5d9d33485)
-- [ ] Data Access layer using Spring data JPA
-- [ ] Database migrations using Flyway
+- [-] Data Access layer using Spring data JPA
+- [X] Database migrations using Flyway
 - [X] I/O Validation
-- [ ] Authentication & Authorization using Spring Security
+- [X] Authentication using Spring Security
+  - [Implement JWT authentication in a Spring Boot 3 application](https://medium.com/@tericcabrel/implement-jwt-authentication-in-a-spring-boot-3-application-5839e4fd8fac)
+  - [Spring Security With JWT for REST API](https://www.toptal.com/spring/spring-security-tutorial) 
+- [ ] Authorization using Spring Security
 - [ ] File system Manipulations
 - [X] Logging
   - [Spring Boot Logging](https://www.baeldung.com/spring-boot-logging)

@@ -9,6 +9,8 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.OffsetDateTime;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,20 +19,22 @@ import java.util.Map;
 public class HelloController {
     private static final Logger logger = LogManager.getLogger(HelloController.class);
     private final UserService _userService;
+    private final JwtService _jwtService;
 
-    public HelloController(UserService userService) {
+    public HelloController(UserService userService, JwtService jwtService) {
         this._userService = userService;
+        _jwtService = jwtService;
     }
     @GetMapping("/hello")
     public String sayHello() {
-        logger.info("Info level log example");
-        logger.debug("Debug level log example");
-        logger.error("Error level log example", new Exception("Example exception"));
+//        logger.info("Info level log example");
+//        logger.debug("Debug level log example");
+//        logger.error("Error level log example", new Exception("Example exception"));
         return "Hello, World!";
     }
 
-    @PostMapping("/user")
-    public ResponseEntity createUser(@Valid @RequestBody UserDto userDto) {
+    @PostMapping("/auth/register")
+    public ResponseEntity<Object> createUser(@Valid @RequestBody UserDto userDto) {
         logger.info("Creating user: {}", userDto);
         try {
             UserDto createdUser = _userService.create(userDto);
@@ -51,6 +55,32 @@ public class HelloController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body(Map.of("message", "An unexpected error occurred while creating the user"));
         }
+    }
+
+    @PostMapping("auth/login")
+    public ResponseEntity<Object> login(@Valid @RequestBody LoginUserDto loginDto) {
+        try {
+            var user = _userService.login(loginDto);
+            String jwtToken = _jwtService.generateToken(user);
+
+            UserDto userDto = new UserDto(
+                    user.getId(),
+                    user.getEmail(),
+                    "", // Password is not returned for security reasons
+                    user.getFirstName(),
+                    user.getLastName(),
+                    user.getPhoneNumber(),
+                    user.getAddress(),
+                    Date.from(OffsetDateTime.parse(user.getBirthDate()).toInstant())
+            );
+
+            LoginResponse loginResponse = new LoginResponse(jwtToken, _jwtService.getExpirationTime(), userDto);
+
+            return ResponseEntity.ok(loginResponse);
+        } catch (UserNotFoundException e) {
+            return ResponseEntity.badRequest().body(Map.of("message", "User not found"));
+        }
+
     }
 
     @GetMapping("/user/all")
