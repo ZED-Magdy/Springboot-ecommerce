@@ -1,4 +1,4 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.services;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

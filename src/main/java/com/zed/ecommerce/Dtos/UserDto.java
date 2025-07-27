@@ -1,4 +1,4 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.Dtos;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;

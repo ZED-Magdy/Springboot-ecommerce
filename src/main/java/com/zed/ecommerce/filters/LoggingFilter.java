@@ -1,4 +1,4 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.filters;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

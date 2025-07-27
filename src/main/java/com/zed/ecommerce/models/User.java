@@ -1,5 +1,7 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.models;
 
+import com.zed.ecommerce.roles.AdminRole;
+import com.zed.ecommerce.roles.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
 import java.util.Date;
-import java.util.List;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -36,6 +37,8 @@ public class User implements UserDetails {
     private  String address;
     @Column()
     private  String birthDate;
+    @Column()
+    private String role; // e.g., "USER", "ADMIN"
     @CreationTimestamp
     @Column(updatable = false)
     private Date createdAt;
@@ -45,7 +48,10 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        if(role.equals(new AdminRole().getName())) {
+            return new AdminRole().getPermissions();
+        }
+        return new UserRole().getPermissions();
     }
 
     @Override

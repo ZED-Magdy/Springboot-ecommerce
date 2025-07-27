@@ -1,8 +1,12 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.config;
 
+import com.zed.ecommerce.filters.JwtAuthenticationFilter;
+import com.zed.ecommerce.interceptors.TimingInterceptor;
+import com.zed.ecommerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.lang.NonNull;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -23,13 +27,13 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
-public class WebConfig implements WebMvcConfigurer {
+public class SecurityConfig implements WebMvcConfigurer {
 
     @Autowired
     private TimingInterceptor timingInterceptor;
     private final UserRepository _userRepository;
 
-    public WebConfig(UserRepository userRepository) {
+    public SecurityConfig(UserRepository userRepository) {
         this._userRepository = userRepository;
     }
 
@@ -68,6 +72,8 @@ public class WebConfig implements WebMvcConfigurer {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/products").hasAnyAuthority("PRODUCT_WRITE")
+                        .requestMatchers(HttpMethod.GET, "/products/**").hasAnyAuthority("PRODUCT_READ")
                     .anyRequest().authenticated()
                 )
                 .sessionManagement(m -> m.sessionCreationPolicy(SessionCreationPolicy.STATELESS))

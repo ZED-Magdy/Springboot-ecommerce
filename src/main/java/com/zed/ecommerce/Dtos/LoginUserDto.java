@@ -1,4 +1,4 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.Dtos;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;

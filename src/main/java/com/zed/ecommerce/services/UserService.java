@@ -1,5 +1,12 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.services;
 
+import com.zed.ecommerce.Dtos.LoginUserDto;
+import com.zed.ecommerce.Dtos.UserDto;
+import com.zed.ecommerce.exceptions.UserAlreadyExistsException;
+import com.zed.ecommerce.exceptions.UserNotFoundException;
+import com.zed.ecommerce.repositories.UserRepository;
+import com.zed.ecommerce.models.User;
+import com.zed.ecommerce.roles.UserRole;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -70,7 +77,7 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with phone number " + phone + " not found"));
     }
 
-    public UserDto create(UserDto userDto) throws  UserAlreadyExistsException {
+    public UserDto create(UserDto userDto) throws UserAlreadyExistsException {
         if (_userRepository.findByEmail(userDto.getEmail()).isPresent()) {
             throw new UserAlreadyExistsException("User with email " + userDto.getEmail() + " already exists");
         }
@@ -88,6 +95,7 @@ public class UserService {
         user.setPassword(hashedPassword);
         user.setAddress(userDto.getAddress());
         user.setBirthDate(userDto.getBirthDate().toInstant().toString());
+        user.setRole(new UserRole().getName());
 
         var savedUser = _userRepository.save(user);
         return new UserDto(

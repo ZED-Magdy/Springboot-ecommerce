@@ -1,5 +1,6 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.repositories;
 
+import com.zed.ecommerce.models.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

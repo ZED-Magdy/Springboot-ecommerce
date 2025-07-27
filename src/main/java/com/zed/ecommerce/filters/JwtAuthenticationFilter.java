@@ -1,5 +1,6 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.filters;
 
+import com.zed.ecommerce.services.JwtService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

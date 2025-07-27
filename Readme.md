@@ -9,7 +9,9 @@
 - [X] Authentication using Spring Security
   - [Implement JWT authentication in a Spring Boot 3 application](https://medium.com/@tericcabrel/implement-jwt-authentication-in-a-spring-boot-3-application-5839e4fd8fac)
   - [Spring Security With JWT for REST API](https://www.toptal.com/spring/spring-security-tutorial) 
-- [ ] Authorization using Spring Security
+- [X] Authorization using Spring Security
+  - [Spring Security: Authentication and Authorization In-Depth](https://www.marcobehler.com/guides/spring-security#_authorization_with_spring_security)
+  - [Authorization Architecture](https://docs.spring.io/spring-security/reference/servlet/authorization/architecture.html) 
 - [ ] File system Manipulations
 - [X] Logging
   - [Spring Boot Logging](https://www.baeldung.com/spring-boot-logging)
@@ -20,7 +22,7 @@
 - [ ] Http Client (e.g: Call third party services)
 - [ ] Send Emails
 - [ ] Rate Limiting
-- [ ] Error handling
+- [X] Error handling
 - [ ] Realtime (Websockets, SSE)
 - [ ] Testing (Unit, Integration)
 - [X] Monitoring (Metrics, Tracing)

@@ -1,4 +1,4 @@
-package com.zed.ecommerce;
+package com.zed.ecommerce.interceptors;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,7 +22,7 @@ public class TimingInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, ModelAndView modelAndView) throws Exception {
+    public void postHandle(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, ModelAndView modelAndView) throws Exception {
         long startTime = System.currentTimeMillis();
         long endTime = (Long) request.getAttribute("startTime");
         long duration = startTime - endTime;
@@ -33,7 +33,7 @@ public class TimingInterceptor implements HandlerInterceptor {
     }
 
     @Override
-    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+    public void afterCompletion(HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler, Exception ex) throws Exception {
         System.out.println("Request URL: " + request.getRequestURL());
         HandlerInterceptor.super.afterCompletion(request, response, handler, ex);
     }
